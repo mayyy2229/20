@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🍳 Website Memasak Sederhana</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #ffe4b5, #fff);
+      text-align: center;
+    }
+
+    header {
+      background: #ff7f50;
+      color: white;
+      padding: 15px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    .alat-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .alat {
+      width: 120px;
+      height: 120px;
+      background: #f8f8f8;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .alat:hover {
+      transform: scale(1.05);
+    }
+
+    .alat img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    #masak-area {
+      background: #fdf5e6;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    #wajan {
+      width: 180px;
+      height: 30px;
+      background: #444;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    #bahan-dimasak {
+      width: 100px;
+      height: 30px;
+      background: #d2691e;
+      border-radius: 8px;
+      color: white;
+      line-height: 30px;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    button {
+      background: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:active {
+      background: #388e3c;
+    }
+
+    footer {
+      background: #f0f0f0;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍳 Website Memasak Sederhana</h1>
+    <p>Belajar memasak secara interaktif dengan perlengkapan dapur lengkap!</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>🧰 Perlengkapan Dapur</h2>
+      <div class="alat-container">
+        <div class="alat" onclick="pilihBahan('🥬 Sayur')">
+          <img src="https://cdn-icons-png.flaticon.com/512/766/766801.png" alt="Bahan">
+          <span>Bahan</span>
+        </div>
+        <div class="alat" onclick="pilihBahan('🍗 Daging')">
+          <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" alt="Bahan">
+          <span>Daging</span>
+        </div>
+        <div class="alat">
+          <img src="https://cdn-icons-png.flaticon.com/512/1830/1830839.png" alt="Kompor">
+          <span>Kompor</span>
+        </div>
+        <div class="alat">
+          <img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Wajan">
+          <span>Wajan</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>👨‍🍳 Area Memasak</h2>
+      <div id="masak-area">
+        <div id="wajan">
+          <div id="bahan-dimasak"></div>
+        </div>
+        <button onclick="mulaiMasak()">Masak Sekarang 🔥</button>
+        <p id="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Website memasak sederhana | Cocok untuk Android & GitHub Pages © 2025
+  </footer>
+
+  <script>
+    let bahanTerpilih = null;
+
+    function pilihBahan(nama) {
+      bahanTerpilih = nama;
+      document.getElementById('status').textContent = `${nama} siap dimasak 🍽️`;
+    }
+
+    function mulaiMasak() {
+      const status = document.getElementById('status');
+      const bahan = document.getElementById('bahan-dimasak');
+
+      if (!bahanTerpilih) {
+        status.textContent = "❌ Pilih bahan dulu sebelum memasak!";
+        return;
+      }
+
+      bahan.textContent = bahanTerpilih;
+      bahan.style.display = "block";
+      status.textContent = "⏳ Memasak...";
+
+      setTimeout(() => {
+        status.textContent = `✅ ${bahanTerpilih} sudah matang!`;
+        bahanTerpilih = null;
+      }, 2000);
+    }
+  </script>
+</body>
+  </html>
